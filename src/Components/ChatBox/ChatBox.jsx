@@ -66,7 +66,7 @@ const ChatBox = () => {
   };
 
   return (
-    <div className=" w-full flex flex-col items-center rounded-lg">
+    <div className="bg-white/30 backdrop-blur-md shadow-lg w-full flex flex-col items-center rounded-lg">
       <style>
         {`
           /* Typing Dots Animation */
