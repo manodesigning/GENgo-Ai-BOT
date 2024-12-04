@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import ChatBox from "../Components/ChatBox/ChatBox";
 import NavBar from "../Components/Nav/NavBar";
-import ButtonGrid from "../Components/ButtonGrid";
-import Aibgvideo from "../assets/Video/Aibgvideo.mp4"
-
+import Spline from "@splinetool/react-spline";
 const Home = () => {
   const [message, setMessage] = useState(""); // State to hold the message for the chat box
 
@@ -14,27 +12,17 @@ const Home = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center relative">
-      {/* Fullscreen Background Video */}
-      <video
-        className="absolute top-0 left-0 w-full h-full object-cover"
-        autoPlay
-        loop
-        muted
-      >
-        <source src={Aibgvideo} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <div className="relative z-10 w-full max-w-screen-xl mt-20 p-6 bg-white rounded-lg shadow-md">
-        
-      <NavBar />
-        {/* Heading of the app*/}
-        <h3 className="text-center text-3xl font-extralight text-gray-700 mb-6">
-          Start writing with <h1 className="font-bold">GENgo AI BOT</h1>
+      {/* Fullscreen Spline 3D Scene */}
+      <div className="absolute top-0 left-0 w-full h-full">
+      <Spline scene="https://prod.spline.design/zecFQJtHeLN8WCIH/scene.splinecode" />
+      </div>
+      {/* Content Container */}
+      <div className="bg-white bg-opacity-10 relative z-10 w-full max-w-screen-xl mt-20 p-6 rounded-lg shadow-md">
+        <NavBar />
+        {/* Heading of the app */}
+        <h3 className="text-center text-3xl font-extralight text-white mb-6">
+          Start writing with <span className="font-bold">GENgo AI BOT</span>
         </h3>
-        {/* <div className="flex justify-center items-center"> */}
-        <div>
-  
-</div>
         {/* ChatBox Input */}
         <ChatBox message={message} /> {/* Pass the message to ChatBox */}
       </div>

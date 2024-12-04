@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import ButtonGrid from "../ButtonGrid";
 import Logo from "../../assets/react.png";
 
-const genAI = new GoogleGenerativeAI("AIzaSyAlGKuKfr-PiKRKTlA9kCQS_h0jxqJi150");
+const genAI = new GoogleGenerativeAI("AIzaSyAHQS74cJFofgLVJnhBxWA8WSgv0WcXO4E");
 
 const ChatBox = () => {
   const [input, setInput] = useState("");
@@ -24,7 +24,7 @@ const ChatBox = () => {
     try {
       const model = genAI.getGenerativeModel({
         model: "gemini-1.5-flash",
-        systemInstruction: "You are Gengo, an AI developed by Mano from the GDG team at IIE."
+        systemInstruction: "You are Gengo, an AI developed by Mano from the GDG team at IIE.",
       });
 
       const chat = model.startChat({
@@ -54,58 +54,26 @@ const ChatBox = () => {
     }
   };
 
+  // Event handler for "Enter" or "Shift + Enter"
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();  // Prevent form submission or newline
+      sendMessage(input);  // Send message
+    } else if (event.key === "Enter" && event.shiftKey) {
+      // Allow new line in the input field
+      setInput((prevInput) => prevInput + "\n");
+    }
+  };
+
   return (
-    <div className="w-full flex flex-col items-center">
-      <style>
-        {`
-          /* Typing Dots Animation */
-          @keyframes typingDots {
-            0%, 20% {
-              opacity: 0;
-            }
-            25% {
-              opacity: 1;
-            }
-            50% {
-              opacity: 0;
-            }
-          }
-          .dot-1 {
-            animation: typingDots 1.4s infinite steps(1) 0s;
-          }
-          .dot-2 {
-            animation: typingDots 1.4s infinite steps(1) 0.2s;
-          }
-          .dot-3 {
-            animation: typingDots 1.4s infinite steps(1) 0.4s;
-          }
-
-          /* Trending Glow Animation */
-          @keyframes glow {
-            0% {
-              box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
-            }
-            50% {
-              box-shadow: 0 0 15px rgba(0, 123, 255, 0.8);
-            }
-            100% {
-              box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
-            }
-          }
-          .glow {
-            animation: glow 1.5s ease-in-out infinite;
-          }
-        `}
-      </style>
-
-      <div className="flex-1 w-full overflow-y-auto mb-4 space-y-4 p-4 bg-gray-50 rounded-lg">
-        {/* Top Button */}
+    <div className="bg-white bg-opacity-10 backdrop-blur shadow-lg w-full flex flex-col items-center rounded-lg p-4">
+      <div className="flex-1 w-full overflow-y-auto mb-4 space-y-4 rounded-lg">
         <div className="flex justify-center items-center">
           <ButtonGrid sendMessage={sendMessage} />
         </div>
-        
+
         {messages.length === 0 && (
-          <div className="text-center text-gray-500 mt-8">
+          <div className="text-center text-white mt-8">
             Start a conversation by sending a message!
           </div>
         )}
@@ -137,13 +105,18 @@ const ChatBox = () => {
         )}
       </div>
 
-      <div className={`w-full flex items-center bg-white p-2 rounded-full shadow-md ${isLoading ? 'glow' : ''}`}>
-        <input
-          type="text"
+      <div
+        className={`w-full flex items-center bg-white p-2 rounded-full shadow-md ${
+          isLoading ? "animate-glow" : ""
+        }`}
+      >
+        <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Send a message..."
-          className="flex-1 p-2 border-none rounded-full focus:outline-none"
+          onKeyDown={handleKeyDown}  // Add the keydown handler here
+          rows="1"  // Set the height to 2 rows
+          className="flex-1 p-2 border-none rounded-full focus:outline-none resize-none"
         />
         <button
           onClick={() => sendMessage(input)}
