@@ -66,7 +66,7 @@ const ChatBox = () => {
   };
 
   return (
-    <div className="bg-white/30 backdrop-blur-md shadow-lg w-full flex flex-col items-center rounded-lg">
+    <div className=" w-full flex flex-col items-center rounded-lg">
       <style>
         {`
           /* Typing Dots Animation */
@@ -109,7 +109,7 @@ const ChatBox = () => {
         `}
       </style>
 
-      <div className=" bg-white/30 backdrop-blur-md shadow-lg flex-1 w-full overflow-y-auto mb-4 space-y-4 p-4  rounded-lg">
+      <div className=" flex-1 w-full overflow-y-auto mb-4 space-y-4 p-4  rounded-lg">
         {/* Top Button */}
         <div className="flex justify-center items-center">
           <ButtonGrid sendMessage={sendMessage} />
