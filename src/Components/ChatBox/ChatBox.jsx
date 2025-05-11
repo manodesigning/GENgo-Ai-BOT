@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import ButtonGrid from "../ButtonGrid";
 import Logo from "../../assets/react.png";
 
-const genAI = new GoogleGenerativeAI("AIzaSyDXK1xIGaI4gr2GEbNftoSLPmsPkF-btbQ");
+const genAI = new GoogleGenerativeAI("AIzaSyBzc4t0VWqqZ5cf3CO7YIzuepECuC4aCX0");
 
 const ChatBox = () => {
   const [input, setInput] = useState("");
